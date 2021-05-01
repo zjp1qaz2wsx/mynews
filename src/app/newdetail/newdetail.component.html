@@ -25,7 +25,7 @@
                 <label for="example7" class="clr-control-label">发表评论</label>
                 <div class="clr-control-container">
                   <div class="clr-textarea-wrapper">
-                    <textarea id="example7" style="width: 800px;" placeholder="发表神评妙论" [(ngModel)]="commentContent" class="clr-textarea"></textarea>
+                    <textarea [(ngModel)]="commentContent" name="commentContent" style="width: 800px;" placeholder="发表神评妙论"  class="clr-textarea"></textarea>
                   </div>
                 </div>
                 <button class="btn btn-primary" type="button" (click)="AddComment()">发表</button>
@@ -42,7 +42,7 @@
 
         <clr-dg-row *clrDgItems="let element of specificNewComments; let i = index" [clrDgItem]="element">
             <clr-dg-cell>{{element.owner}}</clr-dg-cell>
-            <clr-dg-cell>{{element.Content}}</clr-dg-cell>
+            <clr-dg-cell>{{element.content}}</clr-dg-cell>
             <clr-dg-cell>{{element.addtime}}</clr-dg-cell>
         </clr-dg-row>
     </clr-datagrid>

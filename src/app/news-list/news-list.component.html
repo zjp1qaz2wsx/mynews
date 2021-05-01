@@ -13,12 +13,17 @@
                                     (click)="add()">
                                     <clr-icon shape="add"></clr-icon> Add
                                 </button>
+                                <button class="btn btn-secondary"
+                                (click)="refresh()">
+                                <clr-icon shape="refresh"></clr-icon> Refresh
+                            </button>
                             </div>
                         </div>
                     </clr-dg-action-bar>
                     <clr-dg-column [clrDgField]="'title'">Title</clr-dg-column>
                     <clr-dg-column [clrDgField]="'owner'">Author</clr-dg-column>
                     <clr-dg-column [clrDgField]="'addtime'">Create Time</clr-dg-column>
+                    <clr-dg-column >Actions</clr-dg-column>
 
                     <clr-dg-row *clrDgItems="let new of news_list" [clrDgItem]="new">
                         <clr-dg-cell>
@@ -27,6 +32,13 @@
                         </clr-dg-cell>
                         <clr-dg-cell>{{new.owner}}</clr-dg-cell>
                         <clr-dg-cell>{{new.addtime}}</clr-dg-cell>
+                        <clr-dg-cell>
+                            <div *ngIf="isOwner(new.owner)">
+                                <button type="button" class="btn btn-link" (click)="editNew(new)">Edit  </button>
+                                <span>  |  </span>
+                                <button type="button" class="btn btn-link" (click)="deleteNew(new._id)">  Delete</button>
+                            </div>
+                        </clr-dg-cell>
                     </clr-dg-row>
 
                     <clr-dg-footer>
@@ -42,4 +54,5 @@
     </div>
     
     <mynews-addnew (verify_added)="added($event)"></mynews-addnew>
+    <mynews-editnew (verify_edited)="edited($event)"></mynews-editnew>
 </div>

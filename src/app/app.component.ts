@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mynews-root',
@@ -10,11 +11,15 @@ export class AppComponent {
   isLogin: any = false;
   username = null;
 
+  constructor(
+    private router: Router,
+    ) { }
+
   ngOnInit(): void {
-    sessionStorage.removeItem('status') ;   //清除登录状态 
-    sessionStorage.removeItem('user') ;   //清除登录状态 
-    // this.username = sessionStorage.getItem('user');
-    // this.isLogin = sessionStorage.getItem('status');
+    // sessionStorage.removeItem('status') ;   //清除登录状态 
+    // sessionStorage.removeItem('user') ;   //清除登录状态 
+    this.username = sessionStorage.getItem('user');
+    this.isLogin = sessionStorage.getItem('status');
     console.log("app init", this.username, this.isLogin)
   }
 
@@ -22,5 +27,8 @@ export class AppComponent {
   logout() {
     this.isLogin = false;
     sessionStorage.removeItem('status') ;   //清除登录状态 
+    sessionStorage.removeItem('user') ;   //清除登录状态 
+    this.router.navigate(['/login']);
+
   }
 }

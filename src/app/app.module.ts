@@ -15,6 +15,7 @@ import { NewsService } from './services/news.service';
 import { AlertsComponent } from './alerts/alerts.component';
 import { NewdetailComponent } from './newdetail/newdetail.component';
 import { AddnewComponent } from './addnew/addnew.component';
+import { EditnewComponent } from './editnew/editnew.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AddnewComponent } from './addnew/addnew.component';
     NewsListComponent,
     AlertsComponent,
     NewdetailComponent,
-    AddnewComponent
+    AddnewComponent,
+    EditnewComponent
   ],
   imports: [
     BrowserModule,

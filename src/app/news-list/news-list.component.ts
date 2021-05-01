@@ -3,6 +3,8 @@ import { NewsService } from '../services/news.service';
 import { Router } from '@angular/router';
 import { AlertsComponent } from '../alerts/alerts.component';
 import { AddnewComponent } from '../addnew/addnew.component';
+import { element } from 'protractor';
+import { EditnewComponent } from '../editnew/editnew.component';
 
 @Component({
   selector: 'mynews-news-list',
@@ -12,12 +14,14 @@ import { AddnewComponent } from '../addnew/addnew.component';
 export class NewsListComponent implements OnInit {
   @ViewChild(AlertsComponent) alertsComponent: AlertsComponent;
   @ViewChild(AddnewComponent) addnewComponent: AddnewComponent;
-
+  @ViewChild(EditnewComponent) editnewComponent: EditnewComponent;
 
   username = null;
   isLogin:any = false;
   news_list: any [] = null; 
   selectedNews: any [] = null;
+
+  loadingFlag = false;
 
   constructor(
     private newsService: NewsService,
@@ -32,6 +36,7 @@ export class NewsListComponent implements OnInit {
   }
 
   getAllNews() {
+    this.loadingFlag = true;
     this.newsService.getAllNews()
     .subscribe(
       data => {
@@ -43,6 +48,7 @@ export class NewsListComponent implements OnInit {
         } else {
           this.alertsComponent.alertActions("Fail to get news!", "danger");
         }
+        this.loadingFlag = false;
       }
     )
   }
@@ -59,6 +65,54 @@ export class NewsListComponent implements OnInit {
     } else {
         this.alertsComponent.alertActions("Failed to add new!", "danger");
     }
-}
+  }
+
+  edited(event) {
+    console.log("edited event", event);
+    if (event) {
+        this.alertsComponent.alertActions("Edit new successfully!", "success");
+        // this.news_list.push(event)
+        this.getAllNews();
+    } else {
+        this.alertsComponent.alertActions("Failed to edit new!", "danger");
+    }
+  }
+
+  isOwner(new_author) {
+    let isSame = false;
+    if(this.username === new_author){
+      isSame = true;
+    } 
+    return isSame;
+  }
+
+  editNew(obj) {
+    this.editnewComponent.transforInfo(obj);
+  }
+
+  deleteNew(id){
+    console.log("delete new id", id)
+    this.newsService.deleteSpecificNew(id)
+    .subscribe(
+      data => {
+        console.log("delete specific new info", data);
+        let msg = data["msg"];
+        let result = data["result"]
+        if(msg == "success"){
+          this.news_list = this.news_list.filter(element=>{
+            return element._id !== id
+          });
+          console.log("this.news_list",this.news_list)
+        } else {
+          this.alertsComponent.alertActions("Fail to delete new!", "danger");
+        }
+      }
+    )
+
+  }
+
+  refresh() {
+    this.getAllNews();
+  }
 
 }

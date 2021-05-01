@@ -11,6 +11,9 @@ import { CommentsService } from '../services/comments.service';
 })
 export class NewdetailComponent implements OnInit {
   @ViewChild(AlertsComponent) alertsComponent: AlertsComponent;
+
+  username = null;
+
   newId = null;
   title = null;
   content = null;
@@ -22,6 +25,7 @@ export class NewdetailComponent implements OnInit {
   specificNewComments: any [] = null;
   selectedElements: any [] = null;
 
+
   constructor(
     private newsService: NewsService,
     private commentsService: CommentsService,
@@ -31,7 +35,8 @@ export class NewdetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.newId = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log("newId ", this.newId ,typeof (this.newId));
+    this.username = sessionStorage.getItem('user');
+    console.log("newId username", this.newId ,this.username);
     this.getNewDetail(this.newId);
     this.getAllCommentsOfSpecificNew(this.newId);
   }
@@ -71,6 +76,27 @@ export class NewdetailComponent implements OnInit {
   }
 
   AddComment() {
+    let obj = {
+      content: this.commentContent,
+      newid: this.newId,
+      owner: this.username
+    }
+
+    console.log("add comment obj", obj)
+    this.commentsService.addNew(obj)
+    .subscribe(
+      data => {
+        console.log("add comment for specific new ", data);
+        let msg = data["msg"];
+        let result = data["result"]
+        if(msg == "success"){
+          console.log("add comment ", result);
+          this.specificNewComments.push(result);
+        } else {
+          this.alertsComponent.alertActions("Fail to get news commonts!", "danger");
+        }
+      }
+    )
 
   }
 

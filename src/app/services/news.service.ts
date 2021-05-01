@@ -26,4 +26,14 @@ export class NewsService {
     return this.http.get(url);
   }
 
+  deleteSpecificNew(id) {
+    let url = this.baseUrl + "/" + id;
+    return this.http.delete(url);
+  }
+
+  editSpecificNew(id, obj) {
+    let url = this.baseUrl + "/" + id;
+    return this.http.put(url, obj)
+  }
+
 }
