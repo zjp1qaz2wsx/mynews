@@ -1,0 +1,45 @@
+<div *ngIf="isLogin">
+    <div #divManagementPage>
+        <div class="main-body-div" #divManageHistory>
+            <clr-main-container>
+                <clr-datagrid [(clrDgSelected)]="selectedNews" [clrDgLoading]="loadingFlag" [clrDgRowSelection]="true">
+                    <clr-dg-action-bar>
+                        <div>
+                            <mynews-alerts></mynews-alerts>
+                        </div>
+                        <div class="btn-group">
+                            <div>
+                                <button  [disabled]="!isLogin" class="btn btn-secondary"
+                                    (click)="add()">
+                                    <clr-icon shape="add"></clr-icon> Add
+                                </button>
+                            </div>
+                        </div>
+                    </clr-dg-action-bar>
+                    <clr-dg-column [clrDgField]="'title'">Title</clr-dg-column>
+                    <clr-dg-column [clrDgField]="'owner'">Author</clr-dg-column>
+                    <clr-dg-column [clrDgField]="'addtime'">Create Time</clr-dg-column>
+
+                    <clr-dg-row *clrDgItems="let new of news_list" [clrDgItem]="new">
+                        <clr-dg-cell>
+                            <a target="_blank" [routerLink]="['newdetail', new._id]"
+                            routerLinkActive="active">{{new.title}}</a>
+                        </clr-dg-cell>
+                        <clr-dg-cell>{{new.owner}}</clr-dg-cell>
+                        <clr-dg-cell>{{new.addtime}}</clr-dg-cell>
+                    </clr-dg-row>
+
+                    <clr-dg-footer>
+                        <clr-dg-pagination #pagination [clrDgPageSize]="(news_list?.length>=20)?100:20">
+                            <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Items per page</clr-dg-page-size>
+                            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                            of {{pagination.totalItems}} items
+                        </clr-dg-pagination>
+                    </clr-dg-footer>
+                </clr-datagrid>
+            </clr-main-container>
+        </div>
+    </div>
+    
+    <mynews-addnew (verify_added)="added($event)"></mynews-addnew>
+</div>

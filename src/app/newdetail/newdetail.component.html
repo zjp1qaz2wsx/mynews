@@ -1,0 +1,51 @@
+<div>
+  <div #newDetail>
+    <div class="index-module_articleTitle_28fPT">{{title}}</div>
+    <div class="clr-row index-module_articleSource_2dw16">
+        <div class="clr-col-4">
+          <span>Author: {{owner}}</span>
+        </div>
+        <div class="clr-col-4">
+          <span></span>
+        </div>
+        <div class="clr-col-4">
+          <span>Create Time: {{addtime}}</span>
+        </div>
+    </div>
+    <div class="index-module_articleWrap_2Zphx">
+        <div class="index-module_textWrap_3ygOcp">
+            <p> {{content}}</p>
+        </div>
+    </div>
+  </div>
+
+    <div #commentModule>
+        <form class="clr-form clr-form-vertical">
+            <div class="clr-form-control">
+                <label for="example7" class="clr-control-label">发表评论</label>
+                <div class="clr-control-container">
+                  <div class="clr-textarea-wrapper">
+                    <textarea id="example7" style="width: 800px;" placeholder="发表神评妙论" [(ngModel)]="commentContent" class="clr-textarea"></textarea>
+                  </div>
+                </div>
+                <button class="btn btn-primary" type="button" (click)="AddComment()">发表</button>
+              </div>
+          </form>
+    </div>
+
+    <div #commentList>
+      <clr-datagrid [(clrDgSelected)]="selectedElements" class="datagrid-compact">
+        <clr-dg-column [clrDgField]="'owner'">Author</clr-dg-column>
+        <clr-dg-column [clrDgField]="'content'">Content</clr-dg-column>
+        <clr-dg-column [clrDgField]="'addtime'">Create Time</clr-dg-column>
+
+
+        <clr-dg-row *clrDgItems="let element of specificNewComments; let i = index" [clrDgItem]="element">
+            <clr-dg-cell>{{element.owner}}</clr-dg-cell>
+            <clr-dg-cell>{{element.Content}}</clr-dg-cell>
+            <clr-dg-cell>{{element.addtime}}</clr-dg-cell>
+        </clr-dg-row>
+    </clr-datagrid>
+    </div>
+      
+</div>

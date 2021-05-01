@@ -7,4 +7,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'mynews';
+  isLogin: any = false;
+  username = null;
+
+  ngOnInit(): void {
+    sessionStorage.removeItem('status') ;   //清除登录状态 
+    sessionStorage.removeItem('user') ;   //清除登录状态 
+    // this.username = sessionStorage.getItem('user');
+    // this.isLogin = sessionStorage.getItem('status');
+    console.log("app init", this.username, this.isLogin)
+  }
+
+  // 用户注销 （sign out）
+  logout() {
+    this.isLogin = false;
+    sessionStorage.removeItem('status') ;   //清除登录状态 
+  }
 }

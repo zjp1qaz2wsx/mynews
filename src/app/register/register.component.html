@@ -1,0 +1,15 @@
+
+<div class="login-wrapper">
+    <form class="login">
+        <label class="title">
+            <h3 class="welcome">Please Register!</h3>
+        </label>
+        <div class="login-group">
+            <input #user class="username" type="text" id="user" value="" placeholder="User Name">
+            <input #pwd class="password" type="password" id="pwd" value="" placeholder="Password">
+            <div *ngIf="errorMessage!=null" class="error active">{{errorMessage}}</div>
+            <button type="submit" class="btn btn-primary" (click)="register(user.value,pwd.value)">Register</button>
+            <a routerLink = "/login" class="signup">Login</a>
+        </div>
+    </form>
+</div>

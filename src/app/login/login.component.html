@@ -1,0 +1,20 @@
+
+
+<div class="login-wrapper">
+    <form class="login">
+        <label class="title">
+            <h3 class="welcome">Welcome to</h3>
+            My News System
+            <h5 class="hint">Use your account to sign in or create one now</h5>
+        </label>
+        <div class="login-group">
+            <input #user class="username" type="text" id="user" value="" placeholder="User Name">
+            <input #pwd class="password" type="password" id="pwd" value="" placeholder="Password">
+            <div *ngIf="loginErrorMessage!=null" class="error active">{{loginErrorMessage}}</div>
+            <button type="submit" class="btn btn-primary" (click)="login(user.value,pwd.value)">Login</button>
+            <a routerLink = "/register" class="signup">Register</a>
+        </div>
+    </form>
+</div>
+
+
