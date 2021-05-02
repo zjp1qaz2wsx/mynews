@@ -115,4 +115,13 @@ export class NewsListComponent implements OnInit {
     this.getAllNews();
   }
 
+    // 用户注销 （sign out）
+    logout() {
+      this.isLogin = false;
+      sessionStorage.removeItem('status') ;   //清除登录状态 
+      sessionStorage.removeItem('user') ;   //清除登录状态 
+      this.router.navigate(['/login']);
+  
+    }
+
 }
