@@ -24,4 +24,18 @@ export class UserServiceService {
     return this.http.post( `${this.baseUrl}/register` , obj );
   } 
 
+  getAllUsers() {
+    return this.http.get( this.baseUrl);
+  }
+
+  deleteSpcificUser(id) {
+    let url = this.baseUrl + "/" + id
+    return this.http.delete(url)
+  }
+
+  editSpecificUser(id, obj) {
+    let url = this.baseUrl + "/" + id;
+    return this.http.put(url, obj)
+  }
+
 }

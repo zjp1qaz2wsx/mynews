@@ -29,4 +29,14 @@ export class CommentsService {
     let url = environment.url + "/newcomments/" + newid;
     return this.http.get(url);
   }
+
+  deleteSpecificComment(id) {
+    let url = this.baseUrl + "/" + id;
+    return this.http.delete(url);
+  }
+
+  updateSpecificComment(id, obj) {
+    let url = this.baseUrl + "/" + id;
+    return this.http.put(url, obj)
+  }
 }

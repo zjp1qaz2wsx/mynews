@@ -16,6 +16,11 @@ import { AlertsComponent } from './alerts/alerts.component';
 import { NewdetailComponent } from './newdetail/newdetail.component';
 import { AddnewComponent } from './addnew/addnew.component';
 import { EditnewComponent } from './editnew/editnew.component';
+import { AdminComponent } from './admin/admin.component';
+import { UserManageComponent } from './admin/user-manage/user-manage.component';
+import { NewsManageComponent } from './admin/news-manage/news-manage.component';
+import { CommentsManageComponent } from './admin/comments-manage/comments-manage.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,12 @@ import { EditnewComponent } from './editnew/editnew.component';
     AlertsComponent,
     NewdetailComponent,
     AddnewComponent,
-    EditnewComponent
+    EditnewComponent,
+    AdminComponent,
+    UserManageComponent,
+    NewsManageComponent,
+    CommentsManageComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

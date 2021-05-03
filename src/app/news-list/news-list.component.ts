@@ -3,8 +3,8 @@ import { NewsService } from '../services/news.service';
 import { Router } from '@angular/router';
 import { AlertsComponent } from '../alerts/alerts.component';
 import { AddnewComponent } from '../addnew/addnew.component';
-import { element } from 'protractor';
 import { EditnewComponent } from '../editnew/editnew.component';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
 
 @Component({
   selector: 'mynews-news-list',
@@ -15,11 +15,13 @@ export class NewsListComponent implements OnInit {
   @ViewChild(AlertsComponent) alertsComponent: AlertsComponent;
   @ViewChild(AddnewComponent) addnewComponent: AddnewComponent;
   @ViewChild(EditnewComponent) editnewComponent: EditnewComponent;
+  @ViewChild(ChangePasswordComponent) changePasswordComponent: ChangePasswordComponent;
 
   username = null;
   isLogin:any = false;
   news_list: any [] = null; 
   selectedNews: any [] = null;
+  loginUserId = null;
 
   loadingFlag = false;
 
@@ -31,7 +33,8 @@ export class NewsListComponent implements OnInit {
   ngOnInit(): void {
     this.username = sessionStorage.getItem('user');
     this.isLogin = sessionStorage.getItem('status');
-    console.log("this.username, this.isLogin", this.username, this.isLogin);
+    this.loginUserId = sessionStorage.getItem('userid');
+    console.log("this.username, this.isLogin, this.loginUserId ", this.username, this.isLogin, this.loginUserId );
     this.getAllNews();
   }
 
@@ -120,8 +123,23 @@ export class NewsListComponent implements OnInit {
       this.isLogin = false;
       sessionStorage.removeItem('status') ;   //清除登录状态 
       sessionStorage.removeItem('user') ;   //清除登录状态 
+      sessionStorage.removeItem('userid') ;   //清除登录状态 
       this.router.navigate(['/login']);
   
+    }
+
+
+    changePassword() {
+      this.changePasswordComponent.transfor(this.loginUserId);
+    }
+
+    changedPassword(event) {
+      console.log("change password event", event);
+      if (event) {
+          this.alertsComponent.alertActions("Change password successfully!", "success");
+      } else {
+          this.alertsComponent.alertActions("Failed to chnage password!", "danger");
+      }
     }
 
 }

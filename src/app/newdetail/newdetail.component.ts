@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NewsService } from '../services/news.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AlertsComponent } from '../alerts/alerts.component';
 import { CommentsService } from '../services/comments.service';
 
@@ -29,7 +29,6 @@ export class NewdetailComponent implements OnInit {
   constructor(
     private newsService: NewsService,
     private commentsService: CommentsService,
-    private router: Router,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -100,5 +99,24 @@ export class NewdetailComponent implements OnInit {
 
   }
 
+  voteTemplate(id, vote_count) {
+    let obj = {
+      vote: vote_count
+    }
+    this.commentsService.updateSpecificComment(id, obj)
+    .subscribe(
+      data => {
+        console.log("update comment info", data);
+        let msg = data["msg"];
+        let result = data["result"]
+        if(msg == "success"){
+          console.log("update comment ", result);
+          this.getAllCommentsOfSpecificNew(this.newId)
+        } else {
+          this.alertsComponent.alertActions("Fail to get news commonts!", "danger");
+        }
+      }
+    )
+  }
 
 }

@@ -16,6 +16,7 @@
                   </button>
                   <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
                       <a *ngIf="isLogin" (click)="logout()" clrDropdownItem>Log out</a>
+                      <a *ngIf="isLogin" (click)="changePassword()" clrDropdownItem>ChangPassword</a>
                   </clr-dropdown-menu>
               </clr-dropdown>
           </div>
@@ -78,4 +79,5 @@
     
     <mynews-addnew (verify_added)="added($event)"></mynews-addnew>
     <mynews-editnew (verify_edited)="edited($event)"></mynews-editnew>
+    <mynews-change-password (verify_changedpassword)="changedPassword($event)"></mynews-change-password>
 </div>

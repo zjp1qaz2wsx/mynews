@@ -36,9 +36,17 @@ export class LoginComponent implements OnInit {
           this.loginErrorMessage = msg
         } else {
           this.isLogin = true;
+          let userid = result._id;
+          console.log("login user id ", userid)
           sessionStorage.setItem('status', this.isLogin);  // 保存登录状态
           sessionStorage.setItem('user', username);
-          this.router.navigate(['/newslist']);
+          sessionStorage.setItem('userid', userid);
+          if(username === "admin") {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/newslist']);
+          }
+
         }
       }
     );

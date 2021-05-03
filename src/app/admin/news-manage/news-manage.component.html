@@ -1,0 +1,39 @@
+<div #divManagementPage>
+    <div class="main-body-div">
+        <br>
+
+        <clr-main-container>
+            <clr-datagrid [(clrDgSelected)]="selectedTasks" [clrDgLoading]="loadingFlag">
+                <clr-dg-action-bar>
+                    <div class="btn-group">
+                        <span class="titleInfo">New Information</span>
+                    </div>
+                    <div>
+                        <mynews-alerts></mynews-alerts>
+                    </div>
+                </clr-dg-action-bar>
+                <clr-dg-column [clrDgField]="'title'">Title</clr-dg-column>
+                <clr-dg-column [clrDgField]="'owner'">Author</clr-dg-column>
+                <clr-dg-column >Actions</clr-dg-column>
+
+                <clr-dg-row *clrDgItems="let task of news_list" [clrDgItem]="task">
+                    <clr-dg-cell>{{task?.title}}</clr-dg-cell>
+                    <clr-dg-cell>{{task?.owner}}</clr-dg-cell>
+                    <clr-dg-cell>
+                        <div>
+                            <button type="button" class="btn btn-link" (click)="deleteNew(task._id)"> Delete</button>
+                        </div>
+                    </clr-dg-cell>
+                </clr-dg-row>
+
+                <clr-dg-footer>
+                    <clr-dg-pagination #pagination [clrDgPageSize]="100">
+                        <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Items per page</clr-dg-page-size>
+                        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                        of {{pagination.totalItems}} items
+                    </clr-dg-pagination>
+                </clr-dg-footer>
+            </clr-datagrid>
+        </clr-main-container>
+    </div>
+</div>
