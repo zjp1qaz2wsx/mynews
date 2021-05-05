@@ -38,7 +38,8 @@
         <clr-dg-column [clrDgField]="'owner'">Author</clr-dg-column>
         <clr-dg-column [clrDgField]="'content'">Content</clr-dg-column>
         <clr-dg-column [clrDgField]="'addtime'">Create Time</clr-dg-column>
-        <clr-dg-column >Vote</clr-dg-column>
+        <clr-dg-column [clrDgField]="'vote'">Vote</clr-dg-column>
+        
 
         <clr-dg-row *clrDgItems="let element of specificNewComments; let i = index" [clrDgItem]="element">
             <clr-dg-cell>{{element.owner}}</clr-dg-cell>
